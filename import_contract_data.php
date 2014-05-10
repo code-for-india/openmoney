@@ -1,6 +1,7 @@
 <?php
 
-
+date_default_timezone_set('Asia/Calcutta');
+  
 function connectToDatabase() {
 
 		$mysqlConnection = mysql_connect("localhost","root","");
@@ -47,8 +48,8 @@ function insertIntoDatabase($contractRow)
 				. " '" . $contractRow[4] . "',"
 				. " '" . $contractRow[5] . "',"
 				. " '" . $contractRow[6] . "',"
-				. " '" . strtotime ( $contractRow[7]  ) . "',"  
-				. " '" . strtotime ( $contractRow[8] ) . "'," 
+				. " '" . date ('Y-m-d', strtotime($contractRow[7])) . "',"  
+				. " '" . date ('Y-m-d', strtotime($contractRow[8])) . "'," 
 				. " '" . $contractRow[9] . "',"
 				. " '" . $contractRow[10] . "',"
 				. " '" . $contractRow[11] . "',"
@@ -59,9 +60,9 @@ function insertIntoDatabase($contractRow)
 				. " '" . $contractRow[16] . "'"
 			    . ")" ;
 
-
-
-	$result = mysql_query($query)  or die(mysql_error());
+echo $query;
+  //echo("DATE = " .  date ('Y-m-d', strtotime($contractRow[7])) . "  string = " );
+  $result = mysql_query($query)  or die(mysql_error());
 
 
 }
@@ -73,7 +74,7 @@ function insertIntoDatabase($contractRow)
   	{
   		$contractRow =  fgetcsv($contractFile);
   		insertIntoDatabase($contractRow);
-		echo ("\n \"" . $contractRow[2] . "\", \"" . $contractRow[1] . "  " . $contractRow[3] . "\"" );
+    //echo ("\n \"" . $contractRow[2] . "\", \"" . $contractRow[1] . "  " . $contractRow[3] . "\"" );
 	}	
 
 ?>	

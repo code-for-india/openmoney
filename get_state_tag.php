@@ -257,13 +257,13 @@ function getAllLatLngs($geo_tags)
 	   if (sizeof($geo_tags) )
 	   {
 	   		$tagged_contracts++;
-       // echo "\ntag = " . $tagged_contracts;
-	   		$latLngs = getAllLatLngs($geo_tags);
-			
-			for ($j=0; $j< sizeof($latLngs) ; $j++)
-			{
-				echo ("\n" . $contractId . " , " . $latLngs[$j]);
-			}
+       
+			  foreach ($geo_tags as $state=>$map)
+			  {
+          if (strlen($state) > 2)
+          
+				  echo ("\n" . $contractId . " , " . $state);
+			  }
 			
 	   }
 	  else

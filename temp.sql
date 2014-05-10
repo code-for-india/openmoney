@@ -1,5 +1,21 @@
-create table openContractsGeoTags (
-notice_no varchar (100) , 
-lat varchar (200),
-lng varchar(200)
+create table openContracts (
+project_id varchar(100),
+project_title varchar(2000),
+notice_no varchar (100) primary key, 
+notice_description varchar(5000),
+notice_type varchar(100), 
+notice_status varchar(100),
+procurement_method varchar(1000),
+submission_deadline DATETIME, 
+published_date date,
+contact_organization varchar(2000),
+contact_name varchar(2000),
+contact_address varchar(4000),
+contact_city varchar(500), 
+contact_state varchar(200),
+contact_phone varchar(200),
+contact_email varchar(1000),
+contact_website varchar(1000),
+notice_details varchar(10000),
+FULLTEXT (notice_description, notice_details)
 ) ENGINE=MyISAM;
