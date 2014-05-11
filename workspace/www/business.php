@@ -1,29 +1,34 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 
 header('Content-Type: application/json');
 
-$starting_record = $_GET['starting_record'];
-$number_of_rows = $_GET['number_of_rows'];
-$sort_on_closest_submission = $_GET ['sort_on_closest_submission'];
-$location_latitude = $_GET ['location_latitude'];
-$location_longitude = $_GET['location_longitude'];
 $sector = $_GET['sector'];
 $notice_type = $_GET['notice_type'];
-$geo_tagged_only = $_GET['geo_tagged_only'];
 $state = $_GET['state'];
 $description_matches = $_GET['description_matches'];
 $deadline_start_date = $_GET['deadline_start_date'];
 $deadline_end_date = $_GET['deadline_end_date'];
 
 
+$con=mysqli_connect("localhost","root","","CFI");
+
+
+	// Check connection
+	if (mysqli_connect_errno()) {
+  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+
+
 function getDeadlineQuery ()
 {
 
+  global $deadline_start_date, $deadline_start_date;
 	if ( !$deadline_start_date) {
 
 		$t=time();
 
-		$deadline_start_date = date("Y-m-d",$t));
+		$deadline_start_date = date("Y-m-d",$t);
 	}
 	else
 	{
@@ -33,16 +38,18 @@ function getDeadlineQuery ()
 	$query_part = " ( (submission_deadline > '" 
 		           . $deadline_start_date 
 		           . "' ) " ;
-
+  
+  
 	if ($deadline_end_date)
 	{
-		$query_part += " and ( submission_deadline < '"
-			          .  date('Y-m-d', strtotime($deadline_end_date));	
+    $query_part = $query_part . " and ( submission_deadline < '"
+			          .  date('Y-m-d', strtotime($deadline_end_date))	
 			          . " ) ";
 	}
 
-	$query_part += " ) ";
+	$query_part = $query_part . " ) ";
 
+  // echo "QUERY-PART" . $query_part;
 	return $query_part;
 
 }
@@ -50,11 +57,12 @@ function getDeadlineQuery ()
 
 function getStateQuery ()
 {
+  global $state;
 	$query_part = "";
 
 	if ( $state && strlen($state)>0) {
 
-		$query_part += " and (  state like "
+		$query_part = $query_part . " and (  state like "
 		  				. " '%" . $state . "%' )";
 
 
@@ -71,9 +79,10 @@ function getStateQuery ()
 function getNoticeTypeQuery()
 {
 
+  global $notice_type;
 	$query_part = "";
 
-	if ($notice_type && $strlen($notice_type))
+	if ($notice_type && strlen($notice_type))
 	{
 		switch ($notice_type) {
 	    case "ifb":
@@ -100,6 +109,7 @@ function getNoticeTypeQuery()
 
 function getDescriptionQuery()
 {
+  global $description_matches;
 	$query_part = "";
 
 	if ($description_matches && strlen(description_matches) > 0  )
@@ -115,7 +125,7 @@ function getSortParam()
 {
 
 
-	" order by submission_deadline desc "
+  return " order by submission_deadline desc ";
 }
 
 function getJSONData($result)
@@ -126,12 +136,20 @@ function getJSONData($result)
 
 	if ($count > 0 )
 	{
-		$row = mysql_fetch_array($result);
-		$resultRow['notice_title'] = row['notice_description'];
-		$resultRow['notice_type'] = row['notice_type'];
-		$resultRow['state'] = row['state'];
-		$resultRow['deadline'] = row['submission_deadline'];
-		array_push($data, $resultRow);
+    for ($i=0; $i<$count; $i++)
+    {
+      
+      $row = mysql_fetch_array($result);
+      $data[i]= array('notice_title'=> $row['notice_description'], 
+                 'notice_title' => $row['notice_description'],
+                 'notice_type' => $row['notice_type'],
+                 'state' => $row['state'],
+                 'deadline' => $row['submission_deadline']           
+                );
+      
+      
+     }
+		
 	}
 
 	return json_encode($data);
@@ -139,6 +157,8 @@ function getJSONData($result)
 
 function getResults()
 {
+  
+  global $con;
 
 	$query = " select * from openContracts where " 
          . getDeadlineQuery()
@@ -147,13 +167,37 @@ function getResults()
          . getDescriptionQuery()
          . getSortParam();
 
+  //echo "QUERY = "  .  $query;
 
-	$result = mysql_query($query);
+  	$result = mysqli_query($con,$query);
+  	$data = array();
 
-	echo getJSONData($result);
+    $i=0;
+	while($row = mysqli_fetch_array($result)) {
+
+		$row = mysqli_fetch_array($result);
+      $data[$i]= array('notice_title'=> $row['notice_description'], 
+                 'notice_title' => $row['notice_description'],
+                 'notice_type' => $row['notice_type'],
+                 'state' => $row['state'],
+                 'deadline' => $row['submission_deadline']           
+                );
+      $i++;
+  
+	}
+
+	  
+ 
+
+	echo json_encode($data); 
 
 }
 
+
+	
+	
+
+	
 
 getResults();
 

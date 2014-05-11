@@ -23,7 +23,7 @@ function getDeadlineQuery ()
 
 		$t=time();
 
-		$deadline_start_date = date("Y-m-d",$t));
+		$deadline_start_date = date("Y-m-d",$t);
 	}
 	else
 	{

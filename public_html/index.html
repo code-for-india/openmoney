@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <title>Follow Money</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/datepicker3.css" rel="stylesheet" />
+        <link href="css/slider.css" rel="stylesheet" />
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+
+
+
+
+
+
+
+
+
+        <!-- CSS code from Bootply.com editor -->
+        
+        <style type="text/css">
+            body {
+	padding-top:50px;
+}
+
+#masthead {
+	min-height:100px;
+}
+
+#masthead h1 {
+	font-size: 30px;
+	line-height: 1;
+  	padding-top:20px;
+}
+
+#masthead .well {
+	margin-top:8%;
+}
+
+@media screen and (min-width: 768px) {
+	#masthead h1 {
+		font-size: 50px;
+	}
+}
+
+.navbar-bright {
+	background-color:#111155;
+    color:#fff;
+}
+
+.affix-top,.affix{
+	position: static;
+}
+
+@media (min-width: 979px) {
+  #sidebar.affix-top {
+    position: static;
+  	margin-top:30px;
+  	width:330px;
+  }
+  
+  #sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:330px;
+  }
+}
+
+#sidebar li.active {
+  	border:0 #eee solid;
+  	border-right-width:4px;
+}
+
+#ex2Slider .slider-selection {
+	background: #BABABA;
+}
+
+.filter-input{
+  padding-right: 0;
+}
+
+.filter-label{
+  padding-left: 0;
+  padding-right: 0;
+  text-align: left !important;
+}
+
+        </style>
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+        
+        
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Follow Money</a>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#sec">Home</a>
+        </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="masthead">  
+  <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Search
+            <p class="lead">Business User</p>
+          </h1>
+        </div>
+        
+      </div> 
+  </div><!-- /cont -->
+</div>
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+    <div class="col-md-4" id="leftCol">
+      <h2 id="sec0">Filter</h2>
+      <form id="sidebar" class="form-horizontal">
+        <div class="form-group">
+          <input type="text" class="form-control" id="searchquery" placeholder="Search">
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4 filter-label" id="state">In State</label>
+          <div class="col-sm-8 filter-input">
+            <select  class="form-control">
+              <option value=""> </option>
+              <option value="dsf">wqeqweqw</option>
+              <option value="ewr">wer</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4 filter-label" >Notice Type</label>
+          <div class="col-sm-8 filter-input">
+            <select  class="form-control" id="notice-type">
+              <option value="ifb">Invitation for Bids</option>
+              <option value="rfefi">Request for Expression of Interest</option>
+              <option value="gpn">General Procurement Notice</option>
+              <option value="ifp">Invitation for Prequalification</option>
+            </select>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <label class="control-label col-sm-4 filter-label" >Deadline b/w</label>
+          <div class="col-sm-8 filter-input">
+            <div class="input-daterange input-group" id="datepicker">
+                <input type="text" class="form-control" name="start" id="deadline-from" placeholder="From date"/>
+                <span class="input-group-addon">to</span>
+                <input type="text" class="form-control" name="end"  id="deadline-to"  placeholder="To date"/>
+            </div>
+          </div>
+        </div>
+        
+<!--                  <div class="form-group">
+          <b>Rs 10</b>
+          <input id="ex2" type="text" class="form-control" value="" data-slider-id='ex2Slider' data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
+          <b>Rs 1000</b>
+        </div>-->
+        <div class="form-group">
+          <input type="submit" class="btn btn-default btn-lg  btn-block pull-right" value="Submit" />
+        </div>
+      </form>
+    </div>
+    
+    <div class="col-md-8">
+      <h2 id="sec0">Results</h2>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#listtab" data-toggle="tab">List</a></li>
+        <li><a href="#maptab" data-toggle="tab">Map</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="listtab">
+          
+          <table class="table table-condensed" id="resultsList">
+            <thead>
+              <tr>
+                <th>Notice Title</th>
+                <th>Notice Type</th>
+                <th>State</th>
+                <th>Deadline</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="maptab">
+          wqehoiqwe qwe qw
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+
+
+        
+        <script type='text/javascript' src="js/jquery.min.js"></script>
+
+
+        <script type='text/javascript' src="js/bootstrap.min1.js"></script>
+<script type='text/javascript' src="js/bootstrap-datepicker.js"></script>
+
+<script type='text/javascript' src="js/bootstrap-slider.js"></script>
+
+
+        
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+        
+        <script type='text/javascript'>
+        //var r;
+        $(document).ready(function() {
+          
+          $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+          });
+        
+            
+          $('#datepicker').datepicker({
+              format: "yyyy-mm-dd"
+          });
+
+          //r = $('#ex2').slider().data('slider');
+
+          $('#sidebar').affix({
+                offset: {
+                  top: 200
+                }
+          });
+          
+          
+          $('form').submit(function(e){
+            var reqData = {};
+            
+            reqData['description_matches'] = $('#searchquery').val();
+            reqData['state'] = $('#state').val();
+            reqData['notice_type'] = $('#notice-type').val();
+            reqData['deadline_start_date'] = $('#deadline-from').val();
+            reqData['deadline_end_date'] = $('#deadline-to').val();
+            //reqData['starting_record'] = 0;
+            //reqData['number_of_rows'] = 20;
+            
+            console.log(reqData);
+            
+            $.get( "http://mayday-112054.apse1.nitrousbox.com/business.php", reqData)
+              .done(function(data) {
+                console.log('returned data:'+data);
+                for(var i=0; i<data.length; i++){
+                  $('#resultsList tbody').append('<tr><td>'+data[i].notice_title+'</td><td>'+data[i].notice_type+'</td><td>'+data[i].state+'</td><td>'+data[i].deadline+'</td></tr>');
+                }
+                
+                if(data.length === 0)
+                    $('#resultsList tbody').append('<tr><td colspan="4">No results</td></tr>');
+              });
+              
+            e.preventDefault();
+          });
+
+          /* smooth scrolling sections */
+          $('a[href*=#]:not([href=#])').click(function() {
+              if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                if (target.length) {
+                  $('html,body').animate({
+                    scrollTop: target.offset().top - 50
+                  }, 1000);
+                  return false;
+                }
+              }
+          });
+        
+        });
+        
+        </script>
+        
+    </body>
+</html>
